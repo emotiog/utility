@@ -15,7 +15,7 @@ namespace js {
 		std::map<KEY, DATA> m;
 
 	public:
-		SparseVector& operator+(const SparseVector& a) {
+		SparseVector& operator+(const SparseVector& a) {			
 			for (auto iter = a.m.begin(); iter != a.m.end(); ++iter) {
 #ifdef __TEST_ADD
 				const DATA comparisonData = m[iter->first];
@@ -34,9 +34,9 @@ namespace js {
 		std::map<KEY, DATA>::iterator find(KEY key) {
 			auto iter = m.find(key);
 			if (iter == m.end()) {
-				m[key] = 0.0f;
+				return m.insert({ key, 0.0f }).first;
 			}
-			return m.find(key);
+			return iter;
 		}
 
 		void print() const {
